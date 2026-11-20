@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, ci-macos ]
     tags-ignore:
     - 'v*'
   pull_request:
