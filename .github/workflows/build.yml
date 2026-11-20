@@ -30,11 +30,15 @@ jobs:
       fail-fast: false
       matrix:
         cc: [ gcc, clang ]
-    name: build (${{ matrix.cc }})
+        os: [ ubuntu-22.04 ]
+        include:
+          - cc: clang
+          - os: macos-latest
+    name: build (${{ matrix.os }} ${{ matrix.cc }})
     env:
       CC: ${{ matrix.cc }}
       CXX: ${{ matrix.cc == 'clang' && 'clang++' || 'g++' }}
-    runs-on: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
     container: ${{ inputs.image || needs.image.outputs.ref }}
 
     steps:
